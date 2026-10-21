@@ -4580,12 +4580,10 @@ function parseSelector(e, t, n) {
             ((o = "*"), (n += 2)) :
             (o = r(1))),
           s.push(
-            "*" === o ?
-            {
+            "*" === o ? {
               type: SelectorType.Universal,
               namespace: A
-            } :
-            {
+            } : {
               type: SelectorType.Tag,
               name: o,
               namespace: A
@@ -4707,16 +4705,13 @@ function findAll$1(e, t) {
 const Checks = {
   tag_name: (e) =>
     "function" == typeof e ?
-    (t) => isTag$1(t) && e(t.name) :
-    "*" === e ?
-    isTag$1 :
-    (t) => isTag$1(t) && t.name === e,
+    (t) => isTag$1(t) && e(t.name) : "*" === e ?
+    isTag$1 : (t) => isTag$1(t) && t.name === e,
   tag_type: (e) =>
     "function" == typeof e ? (t) => e(t.type) : (t) => t.type === e,
   tag_contains: (e) =>
     "function" == typeof e ?
-    (t) => isText(t) && e(t.data) :
-    (t) => isText(t) && t.data === e
+    (t) => isText(t) && e(t.data) : (t) => isText(t) && t.data === e
 };
 
 function getAttribCheck(e, t) {
@@ -6192,8 +6187,7 @@ const is$1 = (e, t, n, s, r) => {
       } = n,
       o = copyOptions(n);
       o.relativeSelector = !0;
-      const A = t.some((e) => e.some(isTraversal)) ?
-        [PLACEHOLDER_ELEMENT] :
+      const A = t.some((e) => e.some(isTraversal)) ? [PLACEHOLDER_ELEMENT] :
         void 0,
         a = hasDependsOnCurrentElement(t),
         l = r(t, o, A);
@@ -6208,8 +6202,7 @@ const is$1 = (e, t, n, s, r) => {
               null !==
               findOne$1(
                 l,
-                l.shouldTestNextSiblings ?
-                [...s, ...getNextSiblings(t, i)] :
+                l.shouldTestNextSiblings ? [...s, ...getNextSiblings(t, i)] :
                 s,
                 n
               )
@@ -7013,8 +7006,7 @@ const refs = new WeakMap(),
   handler$1 = {
     get: (e, t) =>
       t in prototype ?
-      e[t] :
-      (updateKeys(e),
+      e[t] : (updateKeys(e),
         "length" === t ?
         getKeys(e).length :
         /^\d+$/.test(t) ?
@@ -7640,8 +7632,7 @@ let SVGElement$1 = class extends Element$1 {
     return "http://www.w3.org/2000/svg";
   }
   getAttribute(e) {
-    return "class" === e ?
-      [...this.classList].join(" ") :
+    return "class" === e ? [...this.classList].join(" ") :
       super.getAttribute(e);
   }
   setAttribute(e, t) {
@@ -9105,14 +9096,12 @@ function requireCSSValueExpression() {
         if (i) break;
         if (0 === o.length) break;
       }
-      return i ?
-        {
-          error: i
-        } :
-        {
-          idx: n,
-          expression: r
-        };
+      return i ? {
+        error: i
+      } : {
+        idx: n,
+        expression: r
+      };
     }),
     (e.CSSValueExpression.prototype._parseJSComment = function(e, t) {
       var n = e.charAt(t + 1);
@@ -10230,9 +10219,7 @@ class HTMLSlotElement extends HTMLElement {
       n = this.getRootNode().host?.childNodes ?? [];
     let s;
     if (
-      ((s = t ?
-          [...n].filter((e) => e.slot === this.name) :
-          [...n].filter((e) => !e.slot)),
+      ((s = t ? [...n].filter((e) => e.slot === this.name) : [...n].filter((e) => !e.slot)),
         e?.flatten)
     ) {
       const e = [];
