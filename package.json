@@ -1,0 +1,23 @@
+{
+  "name": "linkedom-gas",
+  "version": "0.1.0",
+  "description": "A self-contained LinkeDOM CommonJS bundle for Google Apps Script with a Buffer polyfill.",
+  "license": "MIT",
+  "main": "index.js",
+  "files": ["index.js", "LICENSE", "THIRD_PARTY_LICENSES.txt", "README.md"],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test",
+    "prepack": "npm run build && npm test"
+  },
+  "engines": {"node": ">=20"},
+  "dependencies": {
+    "buffer": "6.0.3",
+    "linkedom": "0.18.15"
+  },
+  "devDependencies": {
+    "acorn": "^8.15.0",
+    "esbuild": "^0.25.0"
+  },
+  "publishConfig": {"access": "public"}
+}
