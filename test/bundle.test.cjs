@@ -1,14 +1,26 @@
 const assert = require('node:assert/strict');
-const { readFileSync } = require('node:fs');
-const { test } = require('node:test');
+const {
+  readFileSync
+} = require('node:fs');
+const {
+  test
+} = require('node:test');
 const vm = require('node:vm');
-const { parse } = require('acorn');
-const { transform } = require('esbuild');
+const {
+  parse
+} = require('acorn');
+const {
+  transform
+} = require('esbuild');
 
 const code = readFileSync(require.resolve('../index.js'), 'utf8');
 
 function checkSyntax(source) {
-  const ast = parse(source, { ecmaVersion: 2020, sourceType: 'script' });
+  const ast = parse(source, {
+    ecmaVersion: 2020,
+    sourceType: 'script'
+  });
+
   function visit(node) {
     if (!node || typeof node !== 'object') return;
     if (node.type === 'AssignmentExpression') {
@@ -28,13 +40,17 @@ test('bundle uses ES2020 syntax without advanced assignment operators', () => {
 
 test('Apps Script-like context needs no Node or browser globals', () => {
   const context = vm.createContext({});
-  vm.runInContext(code, context, { timeout: 10000 });
+  vm.runInContext(code, context, {
+    timeout: 10000
+  });
   assert.equal(typeof context.require, 'undefined');
   assert.equal(typeof context.module, 'undefined');
   assert.equal(context.exports.default, context.Buffer);
   assert.equal(context.Buffer.from('héllo').toString('base64'), 'aMOpbGxv');
   assert.equal(context.exports.Buffer, context.Buffer);
-  const { document } = context.exports.parseHTML('<html><body><p class="message">Hello</p></body></html>');
+  const {
+    document
+  } = context.exports.parseHTML('<html><body><p class="message">Hello</p></body></html>');
   assert.equal(document.querySelector('.message').textContent, 'Hello');
   document.querySelector('p').textContent = 'Updated';
   assert.match(document.toString(), /Updated/);
@@ -68,9 +84,14 @@ test('lowering preserves single evaluation and short-circuit setter semantics', 
     x **= 2;
     globalThis.result = [reads, writes, keys, objects, x];
   `;
-  const { code: lowered } = await transform(source, {
+  const {
+    code: lowered
+  } = await transform(source, {
     target: 'es2020',
-    supported: { 'logical-assignment': false, 'exponent-operator': false },
+    supported: {
+      'logical-assignment': false,
+      'exponent-operator': false
+    },
   });
   checkSyntax(lowered);
   const originalContext = vm.createContext({});
