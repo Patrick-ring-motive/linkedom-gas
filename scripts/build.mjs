@@ -1,7 +1,17 @@
-import { build } from 'esbuild';
-import { readFile, readdir, writeFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
-import { resolve } from 'node:path';
+import {
+  build
+} from 'esbuild';
+import {
+  readFile,
+  readdir,
+  writeFile
+} from 'node:fs/promises';
+import {
+  fileURLToPath
+} from 'node:url';
+import {
+  resolve
+} from 'node:path';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 
